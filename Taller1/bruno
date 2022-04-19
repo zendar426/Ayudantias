@@ -1,72 +1,78 @@
 import java.util.Scanner;
 
-    public class taller1 {
-        public static void main(String[] args){
-            Scanner leer = new Scanner(System.in);
-            int condicion = 0, camasDisponiblesNormal = 10, pacientes=0,
-                    pacientesDerivadosAHospitalRegional=0, pacientesDerivadosAcasa=0
-                    ,camasDisponiblesSalaTratamientoEspecial=5,pacientesEnSalaNormal=0,pacientesEnSalaEspecial=0;
-            int camas=camasDisponiblesNormal+camasDisponiblesSalaTratamientoEspecial;
+public class taller1 {
+    public static void main(String[] args) {
+        Scanner leer = new Scanner(System.in);
+        int condicion = 0, camasDisponiblesNormal = 10, pacientes = 0,
+                pacientesDerivadosAHospitalRegional = 0, pacientesDerivadosAcasa = 0, camasDisponiblesSalaTratamientoEspecial = 5, pacientesEnSalaNormal = 0, pacientesEnSalaEspecial = 0;
+        int camas = camasDisponiblesNormal + camasDisponiblesSalaTratamientoEspecial;
 
 
-            System.out.println("ingrese la cantidad de pacientes a tratar");
-            pacientes=leer.nextInt();
+        System.out.println("ingrese la cantidad de pacientes a tratar");
+        pacientes = leer.nextInt();
 
-            for (int i = 0; i <pacientes; i++) {
-                System.out.println("Ingrese el estado del paciente" +
-                        "\n1: Leve\n2: Compleja\n3: grave");
-                condicion=leer.nextInt();
-                switch (condicion) {
-                    case 1:
-                        if (camas > 0) {
-                            if (camasDisponiblesNormal > 0) {
-                                System.out.println("El paciente pudo ser ingresado al hospital, internado en sala de tratamiento normal");
-                                camasDisponiblesNormal--;
-                                pacientesEnSalaNormal++;
-                                camas--;
-                            }else if (camasDisponiblesSalaTratamientoEspecial > 0) {
-                                camasDisponiblesNormal--;
-                                pacientesEnSalaNormal++;
-                                camas--;
-                                System.out.println("El paciente pudo ser ingresado al hospital, ingresado a la sala de tratamiento especial");
-                                camasDisponiblesSalaTratamientoEspecial--;
-                                pacientesEnSalaNormal++;
-                                camas--;
 
-                            } else {
-                                System.out.println("el paciente fue derivado a casa");
-                                pacientesDerivadosAcasa++;
-                            }
+        for (int i = 0; i < pacientes; i++) {
+            System.out.println("Ingrese el estado del paciente" +
+                    "\n1: Leve\n2: Compleja\n3: grave");
+            do {
+                condicion = leer.nextInt();
+            } while (condicion <= 0 || condicion > 3);
+
+
+            switch (condicion) {
+                case 1:
+                    if (camas > 0) {
+                        if (camasDisponiblesNormal > 0) {
+                            System.out.println("El paciente pudo ser ingresado al hospital, internado en sala de tratamiento normal");
+                            camasDisponiblesNormal--;
+                            pacientesEnSalaNormal++;
+                            camas--;
+                        } else if (camasDisponiblesSalaTratamientoEspecial > 0) {
+                            camasDisponiblesNormal--;
+                            pacientesEnSalaNormal++;
+                            camas--;
+                            System.out.println("El paciente pudo ser ingresado al hospital, ingresado a la sala de tratamiento especial");
+                            camasDisponiblesSalaTratamientoEspecial--;
+                            pacientesEnSalaNormal++;
+                            camas--;
+
                         } else {
-                            System.out.println("no hay camas disponibles, el paciente fue enviado a su casa");
+                            System.out.println("el paciente fue derivado a casa");
                             pacientesDerivadosAcasa++;
                         }
-                        break;
-                    case 2:
-                        if (camasDisponiblesSalaTratamientoEspecial > 0) {
-                            System.out.println("El paciente pudo ser ingresado al hospital, ingresado a la sala de tratamiento especial");
-                            pacientesEnSalaEspecial++;
-                            camasDisponiblesSalaTratamientoEspecial--;
-                            camas--;
-                        } else if (camasDisponiblesNormal > 0) {
-                            System.out.println("El paciente pudo ser ingresado al hospital, internado en sala de tratamiento normal");
-                            pacientesEnSalaNormal++;
-                            camasDisponiblesNormal--;
-                            camas--;
-                        } else {
-                            System.out.println("No hay camas disponibles, el paciente fue derivado al hospital regional");
-                            pacientesDerivadosAHospitalRegional++;
-                        }
-                        break;
-                    case 3:
-                        System.out.println("el paciente esta grave, sera derivado al hospital regional");
+                    } else {
+                        System.out.println("no hay camas disponibles, el paciente fue enviado a su casa");
+                        pacientesDerivadosAcasa++;
+                    }
+                    break;
+                case 2:
+                    if (camasDisponiblesSalaTratamientoEspecial > 0) {
+                        System.out.println("El paciente pudo ser ingresado al hospital, ingresado a la sala de tratamiento especial");
+                        pacientesEnSalaEspecial++;
+                        camasDisponiblesSalaTratamientoEspecial--;
+                        camas--;
+                    } else if (camasDisponiblesNormal > 0) {
+                        System.out.println("El paciente pudo ser ingresado al hospital, internado en sala de tratamiento normal");
+                        pacientesEnSalaNormal++;
+                        camasDisponiblesNormal--;
+                        camas--;
+                    } else {
+                        System.out.println("No hay camas disponibles, el paciente fue derivado al hospital regional");
                         pacientesDerivadosAHospitalRegional++;
-                        break;
-                }
+                    }
+                    break;
+                case 3:
+                    System.out.println("el paciente esta grave, sera derivado al hospital regional");
+                    pacientesDerivadosAHospitalRegional++;
+                    break;
             }
-                System.out.println("pacientes en sala normal: "+pacientesEnSalaNormal);
-                System.out.println("pacientes en sala de tratamiento especial: "+pacientesEnSalaEspecial);
-                System.out.println("pacientes derivado a casa: "+pacientesDerivadosAcasa);
-                System.out.println("pacientes derivados a hospital regional: "+pacientesDerivadosAHospitalRegional);
-
+            System.out.println("pacientes en sala normal: " + pacientesEnSalaNormal);
+            System.out.println("pacientes en sala de tratamiento especial: " + pacientesEnSalaEspecial);
+            System.out.println("pacientes derivado a casa: " + pacientesDerivadosAcasa);
+            System.out.println("pacientes derivados a hospital regional: " + pacientesDerivadosAHospitalRegional);
         }
+
+
+    }
+}
