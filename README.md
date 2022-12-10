@@ -1,4 +1,4 @@
 # Ayudantias
-Ayudantias cuando llegue a 5 semestre T.T
+Ayudantias cuando sea posible
 
-esta wea es publica XD
+este repositorio es publico: copien con moderacion.
